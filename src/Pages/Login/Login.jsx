@@ -1,10 +1,10 @@
 import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { getAuth, signOut } from 'firebase/auth';
-import { Helmet } from 'react-helmet';
 import { ToastContainer } from 'react-toastify';
-import { AuthContext } from '../../Providers/AuthProvider';
-import 'animate.css';
+// import 'animate.css';
+import { AuthContext } from '../Provider/AuthProvider/AuthProvider';
+import { Helmet } from 'react-helmet-async';
+import { getAuth, signOut } from 'firebase/auth';
 
 const Login = () => {
   const { newUser, signInWithGoogle } = useContext(AuthContext);
