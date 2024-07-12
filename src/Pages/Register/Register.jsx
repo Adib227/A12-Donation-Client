@@ -3,7 +3,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 // import 'animate.css';
 import { AuthContext } from '../Provider/AuthProvider/AuthProvider';
 import { useContext, useState } from 'react';
-import { HelmetProvider } from 'react-helmet-async';
+import { Helmet } from 'react-helmet';
 
 const Register = () => {
   const { registerUser } = useContext(AuthContext);
@@ -48,9 +48,9 @@ const Register = () => {
 
   return (
     <div>
-      <HelmetProvider>
-        <title>Helpass - Register</title>
-      </HelmetProvider>{' '}
+      <Helmet>
+        <title>Bloodonors - Register</title>
+      </Helmet>{' '}
       <div>
         <div className="hero max-w-6xl mx-auto min-h-screen bg-base-200  rounded-lg">
           <div className="hero-content flex-col ">

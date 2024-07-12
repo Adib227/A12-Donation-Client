@@ -2,13 +2,13 @@ export default function Banner() {
   return (
     <>
       <div className="carousel w-full mt-10">
-        <div className="carousel-item relative w-full h-[280px] lg:h-[750px]">
+        <div className="carousel-item relative w-full h-[280px] md:h-[500px] lg:h-[750px]">
           <img
             src="https://i.ibb.co/Y08nsC7/360-F-360193480-ki-F7-OU7k3-YUh-AADb-LQzob-EFwg-Oeej-HZJ.png"
-            className="w-full"
+            className="w-full h-full"
           />
-          <div className="absolute grid text-center w-full gap-y-5 h-full bg-gradient-to-b from-[#151515] to-[rgba(21, 21, 21, 0)]">
-            <div className="text-white font-bold lg:font-extrabold text-2xl lg:text-5xl mt-12 md:mt-12 lg:mt-44">
+          <div className="absolute grid pt-0 md:pt-16 lg:pt-0 text-center w-full gap-y-4 md:gap-y-10 lg:gap-y-5 lg:h-full bg-gradient-to-b from-[#151515] to-[rgba(21, 21, 21, 0)]">
+            <div className="text-white font-bold lg:font-extrabold text-2xl md:text-4xl lg:text-5xl mt-12 md:mt-12 lg:mt-44">
               Donate Your Blood to Us, Save More <br /> Life Together
             </div>
             <div className="text-white font-medium text-base lg:text-xl">
@@ -18,7 +18,7 @@ export default function Banner() {
             </div>
             <div className="mb-6 md:mb-8 lg:mb-56">
               <div className="btn btn-outline btn-accent mr-4">Donate Now</div>
-              <div className="btn btn-outline btn-info ">Explore More</div>
+              <div className="btn btn-outline btn-info">Explore More</div>
             </div>
           </div>
         </div>
