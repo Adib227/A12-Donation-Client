@@ -4,7 +4,7 @@ const Footer = () => {
       <footer className="footer bg-neutral text-neutral-content p-10 mt-14">
         <aside>
           <img
-            className="w-12 md:w-20"
+            className="w-12 md:w-16"
             src="https://i.ibb.co/47775t6/360-F-274422814-sv23a-GOAILKKk8-Zc-Mg-LKv-HQBTEs-Wh7-WP-removebg-preview-1.png"
             alt=""
           />

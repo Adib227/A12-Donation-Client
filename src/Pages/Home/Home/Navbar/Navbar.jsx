@@ -98,7 +98,7 @@ const Navbar = () => {
               >
                 <button
                   onClick={handleLogOut}
-                  className="btn btn-active  animate__animated animate__backInLeft"
+                  className="btn btn-active  animate__animated animate__fadeIn"
                 >
                   Sign Out
                 </button>

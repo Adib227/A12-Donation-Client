@@ -17,7 +17,9 @@ export default function Banner() {
               community!
             </div>
             <div className="mb-6 md:mb-8 lg:mb-56">
-              <div className="btn btn-outline btn-accent mr-4">Donate Now</div>
+              <a href="#donate" className="btn btn-outline btn-accent mr-4 ">
+                Donate Now
+              </a>
               <div className="btn btn-outline btn-info">Explore More</div>
             </div>
           </div>

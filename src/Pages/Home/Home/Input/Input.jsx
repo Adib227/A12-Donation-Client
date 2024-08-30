@@ -2,7 +2,7 @@ import { FaCalendar, FaClock } from 'react-icons/fa';
 
 const Input = () => {
   return (
-    <section className="py-6 my-12  dark:text-gray-900">
+    <section id="donate" className="my-10 md:my-40  dark:text-gray-900">
       <div className="grid max-w-6xl grid-cols-1 px-6 mx-auto lg:px-8 md:grid-cols-2 md:divide-x">
         <form
           noValidate=""

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 // import 'animate.css';
 import { AuthContext } from '../Provider/AuthProvider/AuthProvider';
@@ -40,6 +40,7 @@ const Register = () => {
     registerUser(email, password)
       .then(result => {
         console.log(result.user);
+        Navigate('/');
       })
       .catch(error => {
         console.error(error);
@@ -52,10 +53,10 @@ const Register = () => {
         <title>Bloodonors - Register</title>
       </Helmet>{' '}
       <div>
-        <div className="hero max-w-6xl mx-auto min-h-screen bg-base-200  rounded-lg">
+        <div className="hero max-w-6xl mx-auto lg:min-h-screen bg-base-200  rounded-lg">
           <div className="hero-content flex-col ">
             <div className="text-center lg:text-left">
-              <h1 className="text-5xl mb-8 font-bold  animate__animated animate__fadeInDownBig ">
+              <h1 className="text-5xl mb-8 font-bold mt-24 md:mt-0 animate__animated animate__fadeInDownBig ">
                 Register now!
               </h1>
             </div>
@@ -106,6 +107,20 @@ const Register = () => {
                       )}
                     </span>
                   </div>
+                </div>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text font-bold">
+                      Select The Role
+                    </span>
+                  </label>
+                  <select
+                    name="role"
+                    className="select select-bordered w-full rounded-md p-2 border text-black"
+                  >
+                    <option value="Worker">Donor</option>
+                    <option value="TaskCreator">Volunteer</option>
+                  </select>
                 </div>
                 <div className="form-control mt-6">
                   <button className="btn btn-primary">Register</button>
