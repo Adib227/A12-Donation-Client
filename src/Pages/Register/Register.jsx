@@ -1,9 +1,10 @@
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 // import 'animate.css';
 import { AuthContext } from '../Provider/AuthProvider/AuthProvider';
 import { useContext, useState } from 'react';
 import { Helmet } from 'react-helmet';
+import { toast } from 'react-toastify';
 
 const Register = () => {
   const { registerUser } = useContext(AuthContext);
@@ -12,12 +13,42 @@ const Register = () => {
   const [success, setSuccess] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const handleRegister = e => {
     e.preventDefault();
     const name = e.target.name.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(name, email, password);
+    const role = e.target.role.value;
+    console.log(name, email, password, role);
+    let userinfo = {
+      name,
+      email,
+      password,
+      role,
+    };
+    console.log(userinfo);
+
+    fetch('http://localhost:5000/UserCollection', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(userinfo),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.insertedId) {
+          toast.success('Registered and Stored!');
+          navigate(location?.state ? location?.state : '/');
+        } else {
+          toast.error('Failed to register user');
+        }
+      });
+
+    console.log(userinfo);
 
     setRegisterError('');
     setSuccess('');
@@ -117,9 +148,10 @@ const Register = () => {
                   <select
                     name="role"
                     className="select select-bordered w-full rounded-md p-2 border text-black"
+                    required
                   >
-                    <option value="Worker">Donor</option>
-                    <option value="TaskCreator">Volunteer</option>
+                    <option value="Donor">Donor</option>
+                    <option value="Volunteer">Volunteer</option>
                   </select>
                 </div>
                 <div className="form-control mt-6">

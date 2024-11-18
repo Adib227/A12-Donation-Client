@@ -3,7 +3,8 @@ import Home from '../Home/Home/Home/Home';
 import { createBrowserRouter } from 'react-router-dom';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
-import Item from '../Item/Item';
+import Dashboard from '../Dashboard/Dashboard';
+import Blogs from '../Blogs/Blogs';
 
 const router = createBrowserRouter([
   {
@@ -16,12 +17,16 @@ const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
-        path: '/item',
-        element: <Item></Item>,
+        path: '/blogs',
+        element: <Blogs></Blogs>,
       },
       {
         path: '/login',
         element: <Login></Login>,
+      },
+      {
+        path: '/dashboard',
+        element: <Dashboard></Dashboard>,
       },
       {
         path: '/register',

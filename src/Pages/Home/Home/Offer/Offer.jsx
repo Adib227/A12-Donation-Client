@@ -1,6 +1,6 @@
 const Offer = () => {
   return (
-    <div className="my-12">
+    <div id="explore" className="my-12">
       <h1 className="text-5xl font-semibold text-center py-20">
         What we offer
       </h1>

@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function Banner() {
   return (
     <>
@@ -17,10 +19,14 @@ export default function Banner() {
               community!
             </div>
             <div className="mb-6 md:mb-8 lg:mb-56">
-              <a href="#donate" className="btn btn-outline btn-accent mr-4 ">
-                Donate Now
+              <Link to="register">
+                <a className="btn btn-outline btn-accent mr-4 ">
+                  Join as a donor
+                </a>
+              </Link>
+              <a href="#donate" className="btn btn-outline btn-info">
+                Search Donors
               </a>
-              <div className="btn btn-outline btn-info">Explore More</div>
             </div>
           </div>
         </div>
