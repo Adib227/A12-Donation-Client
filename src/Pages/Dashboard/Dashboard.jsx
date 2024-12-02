@@ -22,24 +22,21 @@ import React from 'react';
 const drawerWidth = 240;
 
 function ResponsiveDrawer(props) {
-  const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [isClosing, setIsClosing] = React.useState(false);
-
-  const handleDrawerClose = () => {
-    setIsClosing(true);
-    setMobileOpen(false);
-  };
-
-  const handleDrawerTransitionEnd = () => {
-    setIsClosing(false);
-  };
-
-  const handleDrawerToggle = () => {
-    if (!isClosing) {
-      setMobileOpen(!mobileOpen);
-    }
-  };
+  // const { window } = props;
+  // const [mobileOpen, setMobileOpen] = React.useState(false);
+  // const [isClosing, setIsClosing] = React.useState(false);
+  // const handleDrawerClose = () => {
+  //   setIsClosing(true);
+  //   setMobileOpen(false);
+  // };
+  // const handleDrawerTransitionEnd = () => {
+  //   setIsClosing(false);
+  // };
+  // const handleDrawerToggle = () => {
+  //   if (!isClosing) {
+  //     setMobileOpen(!mobileOpen);
+  //   }
+  // };
 }
 
 const drawer = (
@@ -74,8 +71,8 @@ const drawer = (
   </div>
 );
 
-const container =
-  window !== undefined ? () => window().document.body : undefined;
+// const container =
+//   window !== undefined ? () => window().document.body : undefined;
 
 const Dashboard = () => {
   return (
@@ -95,7 +92,7 @@ const Dashboard = () => {
               color="inherit"
               aria-label="open drawer"
               edge="start"
-              onClick={handleDrawerToggle}
+              // onClick={handleDrawerToggle}
               sx={{ mr: 2, display: { sm: 'none' } }}
             >
               <MenuIcon />
@@ -112,11 +109,11 @@ const Dashboard = () => {
         >
           {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
           <Drawer
-            container={container}
+            // container={container}
             variant="temporary"
-            open={mobileOpen}
-            onTransitionEnd={handleDrawerTransitionEnd}
-            onClose={handleDrawerClose}
+            // open={mobileOpen}
+            // onTransitionEnd={handleDrawerTransitionEnd}
+            // onClose={handleDrawerClose}
             ModalProps={{
               keepMounted: true, // Better open performance on mobile.
             }}
