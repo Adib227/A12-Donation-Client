@@ -34,7 +34,7 @@ const Input = () => {
               <input
                 type="phone"
                 placeholder="Phone Number"
-                className="block w-full p-3 rounded-md shadow-sm focus:ring focus:ring-opacity-75 focus:dark:ring-violet-600 dark:bg-gray-50"
+                className="block w-full p-3 rounded-md  shadow-sm focus:ring focus:ring-opacity-75 focus:dark:ring-violet-600 dark:bg-gray-50"
                 required
               />
             </label>
