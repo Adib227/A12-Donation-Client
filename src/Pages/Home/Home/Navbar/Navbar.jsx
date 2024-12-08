@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
@@ -6,6 +6,7 @@ import { AuthContext } from '../../../Provider/AuthProvider/AuthProvider';
 
 const Navbar = () => {
   const { logOut, user } = useContext(AuthContext);
+  // const { displayName, photoURL } = user;
   console.log(user);
 
   const handleLogOut = () => {
@@ -28,6 +29,21 @@ const Navbar = () => {
       </li>
     </>
   );
+
+  const [theme, setTheme] = useState('light');
+  useEffect(() => {
+    localStorage.setItem('theme', theme);
+    const localTheme = localStorage.getItem('theme');
+    document.querySelector('html').setAttribute('data-theme', localTheme);
+  }, [theme]);
+
+  const handleToggle = e => {
+    if (e.target.checked) {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+  };
 
   return (
     <div>
@@ -74,6 +90,11 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{navItems}</ul>
         </div>
         <div className="navbar-end">
+          <input
+            onChange={handleToggle}
+            type="checkbox"
+            className="toggle mr-4"
+          />
           {user ? (
             <>
               <tippy className=" text-black font-semibold p-4 rounded-lg">

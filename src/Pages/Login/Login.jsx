@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet';
 import { AuthContext } from '../Provider/AuthProvider/AuthProvider';
 import { getAuth, signOut } from 'firebase/auth';
 import 'animate.css';
+import Swal from 'sweetalert2';
 
 const Login = () => {
   const { newUser, signInWithGoogle } = useContext(AuthContext);
@@ -17,7 +18,24 @@ const Login = () => {
   const handleGoogleSignIn = () => {
     signInWithGoogle()
       .then(result => {
-        alert('Logged in successfully');
+        const userInfo = {
+          email: result.user?.email,
+          name: result.user?.displayName,
+          role: 'Donor',
+        };
+        console.log(userInfo);
+        fetch(`http://localhost:5000/userCollection`, {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify(userInfo),
+        });
+        Swal.fire({
+          title: 'Good job!',
+          text: 'User Logged In Successfully!',
+          icon: 'success',
+        });
         console.log(result.user);
         navigate('/');
       })

@@ -67,17 +67,19 @@ const Appointment = () => {
           modules={[Pagination, Navigation]}
           className="mySwiper max-w-7xl mx-auto my-12"
         >
-          <div className="h-28 ">
+          <div className=" ">
             {' '}
-            <SwiperSlide className="p-12  border-8 bg-[#ebf3f9]">
-              <p className="text-lg font-normal text-black">
-                {' '}
-                ~~ People here are friendly every time! Very thorough. Always
-                checking on you to make sure you are ok.
-              </p>
-              <p className="text-xl -mb-8 pt-12 font-normal text-right text-blue-500">
-                KRISTY KORTNY
-              </p>
+            <SwiperSlide className=" p-12  border-8 bg-[#ebf3f9]">
+              <div className="h-full">
+                <p className=" text-lg font-normal text-black">
+                  {' '}
+                  ~~ People here are friendly every time! Very thorough. Always
+                  checking on you to make sure you are ok.
+                </p>
+                <p className="text-xl -mb-8 pt-12 font-normal text-right text-blue-500">
+                  KRISTY KORTNY
+                </p>
+              </div>
             </SwiperSlide>
           </div>
           <div className="">
