@@ -4,6 +4,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { AuthContext } from '../Provider/AuthProvider/AuthProvider';
 import { useContext, useState } from 'react';
 import { Helmet } from 'react-helmet';
+import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const Register = () => {
@@ -16,66 +17,94 @@ const Register = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleRegister = e => {
+  // const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+  // const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+  const handleRegister = async e => {
     e.preventDefault();
+    // const form = e.target;
     const name = e.target.name.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
+    const photo = e.target.photo.files[0];
     const role = e.target.role.value;
-    console.log(name, email, password, role);
+
+    const formData = new FormData();
+    formData.append('image', photo);
+
+    console.log(name, email, password, photo, role);
     let userinfo = {
       name,
       email,
       password,
+      photo,
       role,
     };
     console.log(userinfo);
 
-    fetch('http://localhost:5000/UserCollection', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify(userinfo),
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.insertedId) {
-          toast.success('Registered and Stored!');
-          navigate(location?.state ? location?.state : '/');
-        } else {
-          toast.error('Failed to register user');
-        }
-      });
-
-    console.log(userinfo);
-
-    setRegisterError('');
-    setSuccess('');
-
-    if (password.length < 6) {
-      setRegisterError('Password should contain 6 characters');
-      return;
-    } else if (!/[A-Z]/.test(password)) {
-      setRegisterError(
-        'Your password should contain at least one uppercase character'
+    try {
+      const { data: imageData } = await axios.post(
+        `https://api.imgbb.com/1/upload?key=${
+          import.meta.env.VITE_IMAGE_HOSTING_KEY
+        }`,
+        formData
       );
-      return;
-    } else if (!/[a-z]/.test(password)) {
-      setRegisterError(
-        'Your password should contain at least one lowercase character'
-      );
-      return;
-    }
 
-    registerUser(email, password)
-      .then(result => {
-        console.log(result.user);
-        Navigate('/');
+      const displayURL = imageData.data.display_url;
+
+      const result = await registerUser(email, password);
+      console.log('User registered successfully:', result.user);
+
+      const userinfo = { name, email, password, photo: displayURL, role };
+      console.log(userinfo);
+
+      fetch('http://localhost:5000/UserCollection', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify(userinfo),
       })
-      .catch(error => {
-        console.error(error);
-      });
+        .then(res => res.json())
+        .then(data => {
+          if (data.insertedId) {
+            toast.success('Registered and Stored!');
+            navigate(location?.state ? location?.state : '/');
+          } else {
+            toast.error('Failed to register user');
+          }
+        });
+
+      console.log(userinfo);
+
+      setRegisterError('');
+      setSuccess('');
+
+      if (password.length < 6) {
+        setRegisterError('Password should contain 6 characters');
+        return;
+      } else if (!/[A-Z]/.test(password)) {
+        setRegisterError(
+          'Your password should contain at least one uppercase character'
+        );
+        return;
+      } else if (!/[a-z]/.test(password)) {
+        setRegisterError(
+          'Your password should contain at least one lowercase character'
+        );
+        return;
+      }
+
+      registerUser(email, password)
+        .then(result => {
+          console.log(result.user);
+          Navigate('/');
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -95,7 +124,7 @@ const Register = () => {
               <form onSubmit={handleRegister} className="card-body">
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text">Name</span>
+                    <span className="label-text font-bold">Name</span>
                   </label>
                   <input
                     type="text"
@@ -106,7 +135,7 @@ const Register = () => {
                   />
                 </div>
                 <div className="form-control">
-                  <label className="label">
+                  <label className="label font-bold">
                     <span className="label-text">Email</span>
                   </label>
                   <input
@@ -118,7 +147,7 @@ const Register = () => {
                   />
                 </div>
                 <div className="form-control">
-                  <label className="label">
+                  <label className="label font-bold">
                     <span className="label-text">Password</span>
                   </label>
                   <input
@@ -138,6 +167,16 @@ const Register = () => {
                       )}
                     </span>
                   </div>
+                </div>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text font-bold">Photo URL</span>
+                  </label>
+                  <input
+                    type="file"
+                    name="photo"
+                    className="file-input file-input-bordered  text-black"
+                  />
                 </div>
                 <div className="form-control">
                   <label className="label">

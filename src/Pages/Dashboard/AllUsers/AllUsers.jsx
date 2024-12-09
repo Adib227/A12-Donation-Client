@@ -29,6 +29,7 @@ const AllUsers = () => {
                 </th>
                 <th>Image</th>
                 <th>Name</th>
+                <th>Email</th>
                 <th>Role</th>
               </tr>
             </thead>
@@ -46,8 +47,9 @@ const AllUsers = () => {
                       <div className="avatar">
                         <div className="mask mask-squircle h-12 w-12">
                           <img
-                            src="https://img.daisyui.com/images/profile/demo/2@94.webp"
-                            alt="Avatar Tailwind CSS Component"
+                            // src="https://img.daisyui.com/images/profile/demo/2@94.webp"
+                            src={user.photo}
+                            alt=""
                           />
                         </div>
                       </div>
@@ -66,6 +68,7 @@ const AllUsers = () => {
                     </span> */}
                   </td>
                   <td className="text-lg font-normal">{user.role}</td>
+                  <td className="text-base">{user.email}</td>
                   <th>
                     <button className="btn btn-ghost btn-xs">details</button>
                   </th>

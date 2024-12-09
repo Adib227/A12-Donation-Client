@@ -6,9 +6,11 @@ import Register from '../Register/Register';
 import Dashboard from '../Dashboard/Dashboard';
 import Blogs from '../Blogs/Blogs';
 import PrivateRoute from './PrivateRoute';
-import DashboardHome from '../Dashboard/DashboardHome/DashboardHome';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import AllUsers from '../Dashboard/AllUsers/AllUsers';
+import DashboardHome from '../Dashboard/DashboardHome/DashboardHome';
+import DonationRequest from '../Dashboard/DonationRequest/DonationRequest';
+import ContentManage from '../Dashboard/ContentManage/ContentManage';
 
 const router = createBrowserRouter([
   {
@@ -50,6 +52,7 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      // admin routes
       {
         path: '/dashboard/dashboardHome',
         element: <DashboardHome></DashboardHome>,
@@ -57,6 +60,14 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/allUsers',
         element: <AllUsers></AllUsers>,
+      },
+      {
+        path: '/dashboard/allRequestPage',
+        element: <DonationRequest></DonationRequest>,
+      },
+      {
+        path: '/dashboard/allPostManage',
+        element: <ContentManage></ContentManage>,
       },
     ],
   },
