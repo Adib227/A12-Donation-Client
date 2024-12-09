@@ -11,6 +11,7 @@ import AllUsers from '../Dashboard/AllUsers/AllUsers';
 import DashboardHome from '../Dashboard/DashboardHome/DashboardHome';
 import DonationRequest from '../Dashboard/DonationRequest/DonationRequest';
 import ContentManage from '../Dashboard/ContentManage/ContentManage';
+import CreateRequest from '../Dashboard/CreateRequest/CreateRequest';
 
 const router = createBrowserRouter([
   {
@@ -62,12 +63,16 @@ const router = createBrowserRouter([
         element: <AllUsers></AllUsers>,
       },
       {
-        path: '/dashboard/allRequestPage',
+        path: '/dashboard/myDonationRequests',
         element: <DonationRequest></DonationRequest>,
       },
       {
-        path: '/dashboard/allPostManage',
+        path: '/dashboard/allDonationRequest',
         element: <ContentManage></ContentManage>,
+      },
+      {
+        path: '/dashboard/createDonationRequest',
+        element: <CreateRequest></CreateRequest>,
       },
     ],
   },

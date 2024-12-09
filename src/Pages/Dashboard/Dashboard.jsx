@@ -8,13 +8,13 @@ const Dashboard = () => {
   const { user } = useContext(AuthContext);
   console.log(user);
 
-  const [newUser, setNewUser] = useState([]);
-  useEffect(() => {
-    fetch(`http://localhost:5000/UserCollection`)
-      .then(res => res.json())
-      .then(data => setNewUser(data));
-  }, []);
-  console.log(newUser);
+  // const [newUser, setNewUser] = useState([]);
+  // useEffect(() => {
+  //   fetch(`http://localhost:5000/UserCollection`)
+  //     .then(res => res.json())
+  //     .then(data => setNewUser(data));
+  // }, []);
+  // console.log(newUser);
 
   return (
     <>
@@ -66,7 +66,7 @@ const Dashboard = () => {
                 aria-label="close sidebar"
                 className="drawer-overlay"
               ></label>
-              <ul className="menu bg-base-200 text-base-content min-h-screen text-base w-80 p-4">
+              <ul className="menu bg-base-200 text-base-content min-h-screen text-base font-medium w-80 p-4">
                 {/* Sidebar content here  */}
                 {/* {newUser.role === 'admin' && ( */}
                 <>
@@ -76,6 +76,11 @@ const Dashboard = () => {
                   <li>
                     <NavLink to="/dashboard/myDonationRequests">
                       Donation Request
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/dashboard/allDonationRequest">
+                      Manage Request
                     </NavLink>
                   </li>
                   <li>
