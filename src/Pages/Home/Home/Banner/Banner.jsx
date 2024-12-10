@@ -1,6 +1,11 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../Provider/AuthProvider/AuthProvider';
 
 export default function Banner() {
+  const user = useContext(AuthContext);
+  console.log(user);
+
   return (
     <>
       <div className="carousel w-full mt-10">
