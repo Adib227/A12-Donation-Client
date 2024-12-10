@@ -31,11 +31,11 @@ const CreateRequest = () => {
 
   console.log(districts, upazilas);
 
-  const districtData = {
-    Dhaka: ['Dhanmondi', 'Gulshan', 'Mirpur'],
-    Chattogram: ['Pahartali', 'Agrabad', 'Halishahar'],
-    Khulna: ['Sonadanga', 'Khalishpur', 'Daulatpur'],
-  };
+  // const districtData = {
+  //   Dhaka: ['Dhanmondi', 'Gulshan', 'Mirpur'],
+  //   Chattogram: ['Pahartali', 'Agrabad', 'Halishahar'],
+  //   Khulna: ['Sonadanga', 'Khalishpur', 'Daulatpur'],
+  // };
 
   useEffect(() => {
     if (formData.district === 'Dhaka') {
@@ -62,22 +62,43 @@ const CreateRequest = () => {
   const handleAddForm = event => {
     event.preventDefault();
     const form = event.target;
-    const thumbNail = form.thumbNail.value;
-    const postTitle = form.postTitle.value;
-    const description = form.description.value;
-    const category = form.category.value;
-    const location = form.location.value;
-    const volunteerNeeded = form.volunteerNeeded.value;
-    const newVolunteer = {
-      thumbNail,
-      postTitle,
-      description,
-      category,
-      location,
-      volunteerNeeded,
+    const requesterName = form.requesterName.value;
+    const requesterEmail = form.requesterEmail.value;
+    const recipientName = form.recipientName.value;
+    const district = form.district.value;
+    const upazila = form.upazila.value;
+    const time = form.time.value;
+    const deadline = form.deadline.value;
+    const hospitalName = form.hospitalName.value;
+    const address = form.address.value;
+    const message = form.message.value;
+    const newBloodRequest = {
+      requesterName,
+      requesterEmail,
+      recipientName,
+      district,
+      upazila,
+      time,
+      deadline,
+      hospitalName,
+      address,
+      message,
     };
-    console.log(newVolunteer);
+    console.log(newBloodRequest);
+
+    fetch('https://localhost:5000/bloodRequest', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(newBloodRequest),
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+      });
   };
+
   const handleClick = () => {
     {
       Swal.fire({
@@ -93,7 +114,9 @@ const CreateRequest = () => {
 
   return (
     <div>
-      Here applicant will fill up the form
+      <div className="text-center py-5 md:py-10 text-3xl font-bold">
+        Donation Request
+      </div>
       <section className="p-6 rounded-xl shadow-lg mb-20 dark:bg-base-200 dark:text-gray-900 max-w-7xl mx-auto animate__animated animate__fadeInUp">
         <form
           onSubmit={handleAddForm}
@@ -104,27 +127,27 @@ const CreateRequest = () => {
           <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md text-center shadow-sm dark:bg-base-200">
             <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-4 ">
               <div className="col-span-full sm:col-span-3 items-center text-left mb-4">
-                <label htmlFor="name" className="font-medium">
+                <label htmlFor="requesterName" className="font-medium">
                   Requester Name
                 </label>
                 <input
-                  // id="name"
+                  // id="requesterName"
                   type="text"
-                  name="name"
-                  defaultValue={user.name}
+                  name="requesterName"
+                  defaultValue={user.displayName}
                   readOnly
                   required
                   className="w-full h-full rounded-xl dark:text-black-50 focus:dark:ring-violet-600 dark:border-gray-300"
                 />
               </div>
               <div className="col-span-full sm:col-span-3 text-left mb-4">
-                <label htmlFor="email" className="font-medium">
+                <label htmlFor="requesterEmail" className="font-medium">
                   Requester Email
                 </label>
                 <input
                   // id="email"
                   type="text"
-                  name="email"
+                  name="requesterEmail"
                   defaultValue={user.email}
                   readOnly
                   required
@@ -132,13 +155,13 @@ const CreateRequest = () => {
                 />
               </div>
               <div className="col-span-full sm:col-span-3 text-left mb-4">
-                <label htmlFor="name" className="font-medium">
+                <label htmlFor="recipientName" className="font-medium">
                   Recipient Name
                 </label>
                 <input
                   // id="name"
                   type="text"
-                  name="name"
+                  name="recipientName"
                   className="w-full h-full rounded-md focus:ring focus:ring-opacity-75 dark:text-black-50 focus:dark:ring-violet-600 dark:border-gray-300"
                 />
               </div>
@@ -206,13 +229,13 @@ const CreateRequest = () => {
                 />
               </div>
               <div className="col-span-full sm:col-span-3 text-left mb-4">
-                <label htmlFor="location" className="font-medium">
+                <label htmlFor="hospitalName" className="font-medium">
                   Hospital Name
                 </label>
                 <input
-                  // id="location"
+                  // id="hospitalName"
                   type="text"
-                  name="location"
+                  name="hospitalName"
                   placeholder=""
                   className="w-full h-full rounded-md focus:ring focus:ring-opacity-75 dark:text-black-50 focus:dark:ring-violet-600 dark:border-gray-300"
                 />
@@ -221,12 +244,14 @@ const CreateRequest = () => {
                 <label htmlFor="deadline" className="font-medium ">
                   Donation Date
                 </label>
-                {/* <input
+                <input
                   id="deadline"
                   type="text"
+                  hidden
+                  name="deadline"
                   placeholder=""
-                  className="w-full h-full rounded-md focus:ring focus:ring-opacity-75 dark:text-gray-50 focus:dark:ring-violet-600 dark:border-gray-300"
-                /> */}
+                  className=""
+                />
                 <DatePicker
                   selected={selectedDate}
                   onChange={handleDateChange}
@@ -239,7 +264,7 @@ const CreateRequest = () => {
                   Full Address
                 </label>
                 <input
-                  // id="location"
+                  // id="address"
                   type="text"
                   name="address"
                   placeholder=""
@@ -251,7 +276,7 @@ const CreateRequest = () => {
                   Message
                 </label>
                 <input
-                  // id="volunteerNeeded"
+                  // id="message"
                   type="text"
                   name="message"
                   placeholder=""
